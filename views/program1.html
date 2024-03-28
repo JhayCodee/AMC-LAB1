@@ -1,0 +1,47 @@
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Comparativo de CPUs (Segmentado o Lineal)</h2>
+
+    <form id="comparacionForm" class="row g-3">
+        <div class="col-md-6">
+            <h3 class="text-center mb-3">CPU 1</h3>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="frecuenciaCPU1" placeholder="Frecuencia CPU 1" required>
+                <label for="frecuenciaCPU1">Frecuencia (MHz)</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="ciclosCPU1" placeholder="Ciclos CPU 1" required>
+                <label for="ciclosCPU1">Ciclos</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="instruccionesCPU1" placeholder="Número de Instrucciones CPU 1" required>
+                <label for="instruccionesCPU1">Número de Instrucciones</label>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <h3 class="text-center mb-3">CPU 2</h3>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="frecuenciaCPU2" placeholder="Frecuencia CPU 2" required>
+                <label for="frecuenciaCPU2">Frecuencia (MHz)</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="ciclosCPU2" placeholder="Ciclos CPU 2" required>
+                <label for="ciclosCPU2">Ciclos</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="instruccionesCPU2" placeholder="Número de Instrucciones CPU 2" required>
+                <label for="instruccionesCPU2">Número de Instrucciones</label>
+            </div>
+        </div>
+
+        <div class="col-12 text-center">
+            <button id="botonComparar" type="button" class="btn btn-primary">Comparar</button>
+        </div>
+    </form>
+
+    <div class="text-center mt-4">
+        <button type="button" class="btn btn-primary btn-lg" onclick="cargarVistaPrincipal()">Volver</button>
+    </div>
+
+    <div id="resultadoComparacion" class="mt-4"></div>
+</div>

@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container mt-4">
-        <h2 class="mb-4">Generar Tabla de Comparación</h2>
+        <h2 class="mb-4">Calculos en Tiempo de Ejecucion y Frecuencia</h2>
         <form id="tablaForm">
             <div class="row">
                 <div class="col-md-6 mb-3">
@@ -27,12 +27,21 @@
                     <input type="text" class="form-control" id="veces" placeholder="1000, 100, 1000, 10, 5">
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="frecuencia" class="form-label">Frecuencia (MHz)</label>
-                    <input type="number" class="form-control" id="frecuencia" placeholder="2.4">
+                    <label for="frecuencia" class="form-label">Frecuencia</label>
+                    <select class="form-select" id="frecuencia-unidad">
+                        <option value="megahertz">Megahertz</option>
+                        <option value="kilohertz">Kilohertz</option>
+                    </select>
+                    <input type="number" class="form-control mt-2" id="frecuencia" placeholder="2.4">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="tiempo-ejecucion" class="form-label">Tiempo de Ejecución</label>
-                    <input type="text" class="form-control" id="tiempo-ejecucion" readonly>
+                    <select class="form-select" id="tiempo-ejecucion-unidad">
+                        <option value="segundos">Segundos</option>
+                        <option value="nanosegundos">Nanosegundos</option>
+                        <option value="milisegundos">Milisegundos</option>
+                    </select>
+                    <input type="number" class="form-control mt-2" id="tiempo-ejecucion" placeholder="Tiempo de Ejecución">
                 </div>
             </div>
             <button type="button" class="btn btn-primary" onclick="generarTabla()">Generar Tabla</button>
@@ -47,9 +56,12 @@
             const instrucciones = document.getElementById('instrucciones').value.split(',').map(item => item.trim());
             const ciclos = document.getElementById('ciclos').value.split(',').map(item => item.trim());
             const veces = document.getElementById('veces').value.split(',').map(item => item.trim());
-            const frecuencia = parseFloat(document.getElementById('frecuencia').value);
+            let frecuencia = parseFloat(document.getElementById('frecuencia').value);
+            const tiempoEjecucion = parseFloat(document.getElementById('tiempo-ejecucion').value);
 
-        
+            // Obtener las unidades seleccionadas
+            const frecuenciaUnidad = document.getElementById('frecuencia-unidad').value;
+            const tiempoEjecucionUnidad = document.getElementById('tiempo-ejecucion-unidad').value;
 
             // Calcular los ciclos totales
             let ciclosTotales = 0;
@@ -57,8 +69,20 @@
                 ciclosTotales += parseInt(ciclos[i]) * parseInt(veces[i]);
             }
 
+            // Convertir la frecuencia a megahertz si es kilohertz
+            if (frecuenciaUnidad === 'kilohertz') {
+                frecuencia /= 1000;
+            }
+
+
+
+            // Convertir el tiempo de ejecución a milisegundos si es nanosegundos
+            if (tiempoEjecucionUnidad === 'nanosegundos') {
+                tiempoEjecucion /= 1000000;
+            }
+
             // Calcular el tiempo de ejecución
-            const tiempoEjecucion = ciclosTotales / frecuencia;
+            const tiempoEjecucionFinal = ciclosTotales / frecuencia;
 
             // Construir la tabla HTML
             let tablaHTML = `
@@ -91,10 +115,12 @@
             // Mostrar la tabla en el área de resultado
             document.getElementById('tablaResultado').innerHTML = tablaHTML;
 
-            // Mostrar el tiempo de ejecución
-            document.getElementById('tiempo-ejecucion').value = tiempoEjecucion.toFixed(2) + ' ms';
-              // Mostrar los ciclos totales
-              document.getElementById('tablaResultado').insertAdjacentHTML('beforeend', `<p>Ciclos Totales: ${ciclosTotales}</p>`);
+            // Mostrar los ciclos totales
+            document.getElementById('tablaResultado').insertAdjacentHTML('beforeend', `<p>Ciclos Totales: ${ciclosTotales}</p>`);
+            // mostrar la frecuencia
+            document.getElementById('tablaResultado').insertAdjacentHTML('beforeend', `<p>Frecuencia: ${frecuencia} MHZ</p>`); 
+            // Mostrar el tiempo de ejecución después de los ciclos totales
+            document.getElementById('tablaResultado').insertAdjacentHTML('beforeend', `<p>Tiempo de Ejecución: ${tiempoEjecucionFinal.toFixed(2)} microSegundos</p>`);
         }
     </script>
 </body>

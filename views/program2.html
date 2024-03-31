@@ -15,6 +15,13 @@
         <form id="tablaForm">
             <div class="row">
                 <div class="col-md-6 mb-3">
+                    <label for="que-desea-calcular" class="form-label">¿Qué desea calcular?</label>
+                    <select class="form-select" id="que-desea-calcular">
+                        <option value="tiempoejecucion">Tiempo de Ejecución</option>
+                        <option value="frecuencia">Frecuencia</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
                     <label for="instrucciones" class="form-label">Instrucciones (separadas por comas)</label>
                     <input type="text" class="form-control" id="instrucciones" placeholder="A, B, C, D, E">
                 </div>
@@ -57,7 +64,10 @@
             const ciclos = document.getElementById('ciclos').value.split(',').map(item => item.trim());
             const veces = document.getElementById('veces').value.split(',').map(item => item.trim());
             let frecuencia = parseFloat(document.getElementById('frecuencia').value);
-            const tiempoEjecucion = parseFloat(document.getElementById('tiempo-ejecucion').value);
+            let tiempoEjecucion = parseFloat(document.getElementById('tiempo-ejecucion').value);
+
+            // Obtener la opción seleccionada
+            const opcionSeleccionada = document.getElementById('que-desea-calcular').value;
 
             // Obtener las unidades seleccionadas
             const frecuenciaUnidad = document.getElementById('frecuencia-unidad').value;
@@ -73,16 +83,32 @@
             if (frecuenciaUnidad === 'kilohertz') {
                 frecuencia /= 1000;
             }
+            
 
-
-
-            // Convertir el tiempo de ejecución a milisegundos si es nanosegundos
+            // Convertir el tiempo de ejecución a segundos si es nanosegundos
             if (tiempoEjecucionUnidad === 'nanosegundos') {
-                tiempoEjecucion /= 1000000;
+                tiempoEjecucion /= 1000000000;
             }
 
-            // Calcular el tiempo de ejecución
-            const tiempoEjecucionFinal = ciclosTotales / frecuencia;
+            // Convertir el tiempo de ejecución a segundos si es milisegundos
+            if (tiempoEjecucionUnidad === 'milisegundos') {
+                tiempoEjecucion = tiempoEjecucion / 1000;
+            }
+
+
+            // Calcular el tiempo de ejecución o la frecuencia según la opción seleccionada
+            //pasar de microsegundos a segundos y de segundos a nanosegundos
+            let resultado;
+            let tiempoejecucionnano=0;
+            let tiempoejecucionseg=0;
+            if (opcionSeleccionada === 'tiempoejecucion') {
+                resultado = ciclosTotales / frecuencia;
+                tiempoejecucionseg=resultado * 1e-6; //segundos
+                tiempoejecucionnano = tiempoejecucionseg * 1e+9; //nanosegundos
+            } else if (opcionSeleccionada === 'frecuencia') {
+                resultado = ciclosTotales / tiempoEjecucion;
+                tiempoejecucionnano = tiempoEjecucion * 1e+9; //nanosegundos
+            }
 
             // Construir la tabla HTML
             let tablaHTML = `
@@ -117,10 +143,11 @@
 
             // Mostrar los ciclos totales
             document.getElementById('tablaResultado').insertAdjacentHTML('beforeend', `<p>Ciclos Totales: ${ciclosTotales}</p>`);
-            // mostrar la frecuencia
-            document.getElementById('tablaResultado').insertAdjacentHTML('beforeend', `<p>Frecuencia: ${frecuencia} MHZ</p>`); 
-            // Mostrar el tiempo de ejecución después de los ciclos totales
-            document.getElementById('tablaResultado').insertAdjacentHTML('beforeend', `<p>Tiempo de Ejecución: ${tiempoEjecucionFinal.toFixed(2)} microSegundos</p>`);
+               // Mostrar el tiempo de ejecucion en nanosegundos 
+               document.getElementById('tablaResultado').insertAdjacentHTML('beforeend', `<p>Tiempo nanoSegundos: ${tiempoejecucionnano.toFixed(2)}</p>`);
+            // Mostrar el resultado (tiempo de ejecución o frecuencia)
+            const unidad = opcionSeleccionada === 'tiempoejecucion' ? 'microSegundos' : 'MHZ';
+            document.getElementById('tablaResultado').insertAdjacentHTML('beforeend', `<p>Resultado: ${resultado.toFixed(2)} ${unidad}</p>`);
         }
     </script>
 </body>

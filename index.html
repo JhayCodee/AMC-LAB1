@@ -1,36 +1,197 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Comparativo de Procesadores</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body, html { height: 100%; margin: 0; }
-        .flex-grow-1 { flex: 1; }
-        #page-container { display: flex; flex-direction: column; min-height: 100vh; }
-        #content-wrap { flex: 1; }
-        footer { flex-shrink: 0; }
-    </style>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>AMC - LAB1</title>
+
+<!-- CSS FILES -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap"
+    rel="stylesheet">
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<link href="css/bootstrap-icons.css" rel="stylesheet">
+
+<link href="css/templatemo-topic-listing.css" rel="stylesheet">
+
 </head>
-<body>
-    <div id="page-container">
-        <!-- Los componentes como Navbar, Hero y Footer se cargarán aquí dinámicamente -->
-    </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Componentes y vista principal -->
-    <script src="js/components/navbar.js"></script>
-    <script src="js/components/hero.js"></script>
-    <script src="js/components/footer.js"></script>
-    <script src="js/main.js"></script>
+<body id="top">
 
-    <!-- programas -->
-    <script src="JS/programs/program1.js"></script>
-    <script src="JS/programs/program2.js"></script>
+    <main>
 
+        <nav class="navbar navbar-expand-lg">
+            <div class="container text-center d-flex align-items-center justify-content-center">
+                <a class="navbar-brand" href="index.html">
+                    <i class="bi-back"></i>
+                    <span>AMC III</span>
+                </a>
+
+                <div class="d-lg-none ms-auto me-4">
+                    <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
+                </div>
+            </div>
+        </nav>
+
+        <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-8 col-12 mx-auto">
+                        <h2 class="text-white text-center">Comparativa de Procesadores</h1>
+
+                            <h6 class="text-center">Explora y compara el rendimiento de distintos CPUs.</h6>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-section">
+            <div class="container">
+                <div class="row justify-content-center">
+
+                    <div class="col-lg-6 col-12">
+                        <div class="custom-block custom-block-overlay">
+                            <div class="d-flex flex-column h-100">
+                                <img src="images/businesswoman-using-tablet-analysis.jpg"
+                                    class="custom-block-image img-fluid" alt="">
+
+                                <div class="custom-block-overlay-text d-flex">
+                                    <div>
+                                        <h5 class="text-white mb-2">Comparativo Detallado</h5>
+
+                                        <p class="text-white">Comparativo detallado de dos o más procesadores. Descubre
+                                            cuál ofrece el mejor rendimiento para tus necesidades.</p>
+
+                                        <button id="btnPrograma1" type="button" class="btn custom-btn mt-2 mt-lg-3">Ir
+                                            al programa</a>
+
+                                    </div>
+
+                                    <span class="badge bg-finance rounded-pill ms-auto">1</span>
+                                </div>
+                                <div class="section-overlay"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-12">
+                        <div class="custom-block custom-block-overlay">
+                            <div class="d-flex flex-column h-100">
+                                <img src="images/businesswoman-using-tablet-analysis.jpg"
+                                    class="custom-block-image img-fluid" alt="">
+
+                                <div class="custom-block-overlay-text d-flex">
+                                    <div>
+                                        <h5 class="text-white mb-2">Cálculos Específicos</h5>
+
+                                        <p class="text-white">Cálculos específicos de tiempo de ejecución y frecuencia.
+                                            Averigua las capacidades reales de tu hardware.</p>
+
+                                        <button id="btnPrograma2" type="button" class="btn custom-btn mt-2 mt-lg-3">Ir
+                                            al programa</a>
+                                    </div>
+
+                                    <span class="badge bg-finance rounded-pill ms-auto">1</span>
+                                </div>
+                                <div class="section-overlay"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="explore-section section-padding section-bg" id="section_2">
+          <!-- ejercicios -->
+        </section>
+        
+
+    </main>
+
+
+    <footer class="site-footer section-padding">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-12 mb-4 pb-2">
+                    <a class="navbar-brand mb-2" href="index.html">
+                        <i class="bi-back"></i>
+                        <span>AMC III</span>
+                    </a>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-6">
+                    <h6 class="site-footer-title mb-3">Integrantes</h6>
+
+                    <ul class="site-footer-links">
+                        <li class="site-footer-link-item">
+                            <span class="site-footer-link">Luis Vargas</a>
+                        </li>
+                        <br>
+                        <li class="site-footer-link-item">
+                            <span class="site-footer-link">Handel Vanegas</a>
+                        </li>
+                        <br>
+
+                        <li class="site-footer-link-item">
+                            <span class="site-footer-link">Kevin Peinado</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
+                    <h6 class="site-footer-title mb-3">Grupo</h6>
+
+                    <p class="text-white d-flex mb-1">
+                        <span href="tel: 305-240-9671" class="site-footer-link">
+                            5T3-CO
+                            </a>
+                    </p>
+
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
+                    <h6 class="site-footer-title mb-3">Laboratorio #1</h6>
+
+                    <p class="text-white d-flex mb-1">
+                        <span href="tel: 305-240-9671" class="site-footer-link">
+                            Cálculos comparativos entre Computadores
+                            </a>
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+    </footer>
+    
+    <script src="JS/main.js"></script>
+    <script src="JS/libs/jquery.min.js"></script>
+    <script src="JS/libs/bootstrap.bundle.min.js"></script>
+    <script src="JS/libs/jquery.sticky.js"></script>
+    <script src="JS/libs/custom.js"></script>
+
+    <!-- <script src="JS/programs/program1.js"></script> -->
 
 </body>
+
 </html>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> -->
+<!-- Componentes y vista principal -->
+<!-- <script src="js/components/navbar.js"></script>
+<script src="js/components/hero.js"></script>
+<script src="js/components/footer.js"></script>
+
+<!-- programas -->

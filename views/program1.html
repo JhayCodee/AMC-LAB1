@@ -1,61 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-<body>
-    <div class="container mt-4">
-        <h2 class="mb-4">Comparativo de CPUs (Segmentado o Lineal)</h2>
-    
-        <form id="comparacionForm" class="row g-3">
-            <div class="col-md-6">
-                <h3 class="text-center">CPU 1</h3>
-                <div class="col-md-6 mb-3">
-                    <label for="frecuenciaCPU1">Frecuencia</label>
-                    <select name="sfCPU1" class="form-select" id="fuCPU1">
-                        <option value="1">Megahertz</option>
-                        <option value="2">Kilohertz</option>
-                        <option value="3">Hertz</option>
-                    </select>
-                    <input type="number" class="form-control" id="frecuenciaCPU1" placeholder="Frecuencia CPU 1" required>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="ciclosCPU1">CPI</label>
-                    <input type="number" class="form-control" id="ciclosCPU1" placeholder="Ciclos CPU 1" required>
-                </div>
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Comparativo de CPUs (Segmentado o Lineal)</h2>
+
+    <form id="comparacionForm" class="row g-3">
+        <div class="col-md-6">
+            <h3 class="text-center">CPU 1</h3>
+            <div class="mb-3">
+                <label for="frecuenciaCPU1" class="form-label">Frecuencia</label>
+                <select name="sfCPU1" class="form-select" id="fuCPU1">
+                    <option value="1">Megahertz</option>
+                    <option value="2">Kilohertz</option>
+                    <option value="3">Hertz</option>
+                </select>
+                <input type="number" class="form-control" id="frecuenciaCPU1" placeholder="Frecuencia CPU 1" required>
             </div>
-    
-            <div class="col-md-6">
-                <h3 class="text-center">CPU 2</h3>
-                <div class="col-md-6 mb-3">
-                    <label for="frecuenciaCPU2">Frecuencia</label>
-                    <select class="form-select" id="fuCPU2">
-                        <option value="1">Megahertz</option>
-                        <option value="2">Kilohertz</option>
-                        <option value="3">Hertz</option>
-                    </select>
-                    <input type="number" class="form-control" id="frecuenciaCPU2" placeholder="Frecuencia CPU 2" required>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="ciclosCPU2">CPI</label>
-                    <input type="number" class="form-control" id="ciclosCPU2" placeholder="Ciclos CPU 2" required>
-                </div>
+            <div class="mb-3">
+                <label for="ciclosCPU1" class="form-label">CPI</label>
+                <input type="number" class="form-control" id="ciclosCPU1" placeholder="Ciclos CPU 1" required>
             </div>
-    
-            <div class="col-12 text-center">
-                <button id="botonComparar" type="button" class="btn btn-primary">Comparar</button>
-            </div>
-        </form>
-    
-        <div class="text-center mt-4">
-            <button type="button" class="btn btn-primary btn-lg" onclick="cargarVistaPrincipal()">Volver</button>
         </div>
-    
-        <div id="resultadoComparacion" class="mt-4"></div>
-    </div>
-    
-</body>
-</html>
+
+        <div class="col-md-6">
+            <h3 class="text-center">CPU 2</h3>
+            <div class="mb-3">
+                <label for="frecuenciaCPU2" class="form-label">Frecuencia</label>
+                <select class="form-select" id="fuCPU2">
+                    <option value="1">Megahertz</option>
+                    <option value="2">Kilohertz</option>
+                    <option value="3">Hertz</option>
+                </select>
+                <input type="number" class="form-control" id="frecuenciaCPU2" placeholder="Frecuencia CPU 2" required>
+            </div>
+            <div class="mb-3">
+                <label for="ciclosCPU2" class="form-label">CPI</label>
+                <input type="number" class="form-control" id="ciclosCPU2" placeholder="Ciclos CPU 2" required>
+            </div>
+        </div>
+
+        <div class="col-12 text-center">
+            <button id="botonComparar" type="button" class="btn btn-primary">Comparar</button>
+        </div>
+    </form>
+
+    <div id="resultadoComparacion" class="mt-4"></div>
+</div>

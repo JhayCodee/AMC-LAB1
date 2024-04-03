@@ -26,5 +26,4 @@ function initProgram2() {
     });
 }
 
-initProgram1();
-
+export default initProgram2();

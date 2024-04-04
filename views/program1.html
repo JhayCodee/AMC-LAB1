@@ -2,41 +2,63 @@
     <h2 class="mb-4 text-center">Comparativo de CPUs (Segmentado o Lineal)</h2>
 
     <form id="comparacionForm" class="row g-3">
-        <div class="col-md-6">
-            <h3 class="text-center">CPU 1</h3>
-            <div class="mb-3">
-                <label for="frecuenciaCPU1" class="form-label">Frecuencia</label>
-                <select name="sfCPU1" class="form-select" id="fuCPU1">
+        <!-- CPU A -->
+        <div class="col-md-6 mb-3">
+            <h3 class="text-center">CPU A</h3>
+            <div class="col-md-6 mb-3">
+                <label for="tiempoejecucionA" class="form-label">Tiempo ejecución</label>
+                <select name="magnituddetiempo" class="form-select" id="tteA"> <!------------------------------------------------ id tteA -->
+                    <option value="1">Segundos</option>
+                    <option value="2">Nanosegundos</option>
+                    <option value="3">Kilosegundos</option>
+                </select>
+                <input type="number" class="form-control mt-2" id="teA" placeholder="Tiempo ejecución CPU A"> <!-- id teA -->
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="frecuenciaA" class="form-label">Frecuencia</label>
+                <select name="magnituddefrecuencia" class="form-select" id="tfA"> <!------------------------------------------------ id tfA -->
                     <option value="1">Megahertz</option>
                     <option value="2">Kilohertz</option>
                     <option value="3">Hertz</option>
                 </select>
-                <input type="number" class="form-control" id="frecuenciaCPU1" placeholder="Frecuencia CPU 1" required>
-            </div>
-            <div class="mb-3">
-                <label for="ciclosCPU1" class="form-label">CPI</label>
-                <input type="number" class="form-control" id="ciclosCPU1" placeholder="Ciclos CPU 1" required>
+                <input type="number" class="form-control mt-2" id="fA" placeholder="Frecuencia CPU A"> <!-- id fA -->
             </div>
         </div>
 
-        <div class="col-md-6">
+        <!-- CPU B -->
+
+        <div class="col-md-6 mb-3">
             <h3 class="text-center">CPU 2</h3>
-            <div class="mb-3">
-                <label for="frecuenciaCPU2" class="form-label">Frecuencia</label>
-                <select class="form-select" id="fuCPU2">
+            <div class="col-md-6 mb-3">
+                <label for="tiempoejecucionB" class="form-label">Tiempo ejecución</label>
+                <select class="form-select" id="tteB"> <!----------------------------------------------------------- id tteB -->
+                    <option value="1">Segundos</option>
+                    <option value="2">Nanosegundos</option>
+                    <option value="3">Kilosegundos</option>
+                </select>
+                <input type="number" class="form-control mt-2" id="teB" placeholder="Tiempo ejecución CPU B"> <!-- id teB -->
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="frecuenciaB" class="form-label">Frecuencia</label>
+                <select class="form-select" id="tfB"> <!----------------------------------------------------------- id tfA -->
                     <option value="1">Megahertz</option>
                     <option value="2">Kilohertz</option>
                     <option value="3">Hertz</option>
                 </select>
-                <input type="number" class="form-control" id="frecuenciaCPU2" placeholder="Frecuencia CPU 2" required>
-            </div>
-            <div class="mb-3">
-                <label for="ciclosCPU2" class="form-label">CPI</label>
-                <input type="number" class="form-control" id="ciclosCPU2" placeholder="Ciclos CPU 2" required>
+                <input type="number" class="form-control mt-2" id="fB" placeholder="Frecuencia CPU B"> <!-- id fB -->
             </div>
         </div>
 
-        <div class="col-12 text-center">
+        <div class="col-md-3 mb-3">
+            <label for="ciclosAoB" class="form-label">CPI</label>
+            <select class="form-select" id="cpiParaAoB"> <!----------------------------------------------------------- id tfA -->
+                <option value="1">A</option>
+                <option value="2">B</option>
+            </select>
+            <input type="number" class="form-control mt-2" id="ciclosAoB" placeholder="Ciclos"> <!-- id ciclosB -->
+        </div>
+
+        <div class="text-center">
             <button id="botonComparar" type="button" class="btn btn-primary">Comparar</button>
         </div>
     </form>

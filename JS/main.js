@@ -14,43 +14,100 @@ function cargarPrograma1() {
 
             botonComparar.addEventListener('click', () => {
                 // Recoger valores del formulario y convertirlos a números
-                const frecuenciaCPU1 = Number(document.getElementById('frecuenciaCPU1').value); // En MHz
-                const ciclosCPU1 = Number(document.getElementById('ciclosCPU1').value);
-                const frecuenciaCPU2 = Number(document.getElementById('frecuenciaCPU2').value); // En MHz
-                const ciclosCPU2 = Number(document.getElementById('ciclosCPU2').value);
-                const tipoFrecuenciaCPU1 = Number(document.getElementById('fuCPU1').value);
-                const tipoFrecuenciaCPU2 = Number(document.getElementById('fuCPU2').value);
-            
-                // Función para ajustar la frecuencia según el tipo
-                function ajustarFrecuencia(frecuencia, tipo) {
-                    switch(tipo) {
-                        case 1: // MHz a Hz
-                            return frecuencia * 1e6;
-                        case 2: // kHz a Hz
-                            return frecuencia * 1e3;
-                        case 3: // Hz
+                const magnitudtiempoA = Number(document.getElementById('tteA').value); // Selección de la magnitud del tiempo
+                const tiempoEjecucionA = Number(document.getElementById('teA').value);
+
+                const magnitudfrecuenciaA = Number(document.getElementById('tfA').value); // Selección de la magnitud de la frecuencia
+                const frecuenciaA = Number(document.getElementById('fA').value);
+
+                const magnitudtiempoB = Number(document.getElementById('tteB').value); // Selección de la magnitud del tiempo
+                const tiempoEjecucionB = Number(document.getElementById('teB').value);
+                const magnitudfrecuenciaB = Number(document.getElementById('tfB').value); // Selección de la magnitud de la frecuencia
+                const frecuenciaB = Number(document.getElementById('fB').value);
+                
+                const ciclosParaAoB = Number(document.getElementById('cpiParaAoB').value); // Ciclos para A o B CPIA = Numero * CPIB o CPIB = Numero * CPIA
+                const cpi = Number(document.getElementById('ciclosAoB').value);
+
+                // Función para ajustar la frecuencia según el tipo para retornar en MHz
+                function ajustarFrecuencia(frecuencia, tipof) {
+                    switch(tipof) {
+                        case 1: // MHz                            
                             return frecuencia;
+                        case 2: // kiloHetz a MHz
+                            return frecuencia * 1e-3;
+                        case 3: // Hz a MHz
+                            return frecuencia * 1e-6;
                         default:
-                            return frecuencia; // Por defecto asume que ya está en Hz
+                            return frecuencia; // Por defecto asume que ya está en MHz
+                    }
+                }
+
+                // Función para ajustar el tiempo de ejecución según el tipo para retornar en segundos
+                function ajustarTiempoEjecucion(tiempoEjecucion, tipot) {
+                    switch(tipot) {
+                        case 1: // s
+                            return tiempoEjecucion;
+                        case 2: // ns a s                        
+                            return tiempoEjecucion * 1e9;
+                        case 3: // kilosegundos a segundos                            
+                            return tiempoEjecucion * 1e3;
+                        default:                            
+                            return tiempoEjecucion; // Por defecto asume que ya está en s
+                    }
+                }
+
+                function asignarCiclos(darCPI, cpiPara) {
+                    switch(cpiPara) {
+                        case 1: // Dar CPI para A
+                            return darCPI;                            
+                        case 2: // Dar CPI para B
+                            return darCPI;
+                        default:
+                            return darCPI; // Por defecto para A
                     }
                 }
             
-                // Función para calcular el tiempo de ejecución en nanosegundos
-                function calcularTiempoEjecucion(ciclos, frecuencia, tipo) {
-                    const frecuenciaAjustada = ajustarFrecuencia(frecuencia, tipo);
-                    const tiempoEjecucionSegundos = ciclos / frecuenciaAjustada;
-                    return tiempoEjecucionSegundos * 1e9; // Convertir a nanosegundos
+                // calcular el tiempo de ejecución o frecuencia
+                const frecuenciaAjustadaA = ajustarFrecuencia(frecuenciaA, magnitudfrecuenciaA);
+                const frecuenciaAjustadaB = ajustarFrecuencia(frecuenciaB, magnitudfrecuenciaB);
+                const tiempoEjecucionAjustadoA = ajustarTiempoEjecucion(tiempoEjecucionA, magnitudtiempoA);
+                const tiempoEjecucionAjustadoB = ajustarTiempoEjecucion(tiempoEjecucionB, magnitudtiempoB);
+                const ciclos = asignarCiclos(cpi, ciclosParaAoB);
+
+                if(tiempoEjecucionB == 0){
+                    const tb = (tiempoEjecucionAjustadoA * frecuenciaAjustadaA) / (ciclos * frecuenciaAjustadaB);
+                    const ta = tiempoEjecucionAjustadoA;
+
+                    mostrarResultados(ta, tb, ta*1e9, tb*1e9, frecuenciaAjustadaA, frecuenciaAjustadaB);
+                }else if(tiempoEjecucionA == 0){
+                    const ta = (ciclos * tiempoEjecucionAjustadoB * frecuenciaAjustadaB) / frecuenciaAjustadaA;
+                    const tb = tiempoEjecucionAjustadoB;
+                    mostrarResultados(ta, tb, ta*1e9, tb*1e9, frecuenciaAjustadaA, frecuenciaAjustadaB);
+
+                }else if(frecuenciaA == 0){
+                    const fa = (frecuenciaB * tiempoEjecucionAjustadoB) / (ciclos * tiempoEjecucionAjustadoA);
+                    const fb = frecuenciaAjustadaB;
+                    mostrarResultados(tiempoEjecucionAjustadoA,tiempoEjecucionAjustadoB, tiempoEjecucionAjustadoA*1e9, tiempoEjecucionAjustadoB*1e9,fa, fb);
+                }else{
+                    console.log("ciclos",ciclos);
+                    console.log("frecuenciaAjustadaA",frecuenciaAjustadaA);
+                    console.log("tiempoEjecucionAjustadoA",tiempoEjecucionAjustadoA);
+                    console.log("tiempoEjecucionAjustadoB",tiempoEjecucionAjustadoB);
+                    const fb = (ciclos * frecuenciaAjustadaA * tiempoEjecucionAjustadoA) / (tiempoEjecucionAjustadoB);
+                    const fa = frecuenciaAjustadaA;
+                    mostrarResultados(tiempoEjecucionAjustadoA,tiempoEjecucionAjustadoB, tiempoEjecucionAjustadoA*1e9, tiempoEjecucionAjustadoB*1e9,fa, fb);
                 }
-            
-                // Calcular tiempos de ejecución
-                const tiempoEjecucionCPU1Nano = calcularTiempoEjecucion(ciclosCPU1, frecuenciaCPU1, tipoFrecuenciaCPU1);
-                const tiempoEjecucionCPU2Nano = calcularTiempoEjecucion(ciclosCPU2, frecuenciaCPU2, tipoFrecuenciaCPU2);
-            
-                // Mostrar resultados
-                mostrarResultados(tiempoEjecucionCPU1Nano, tiempoEjecucionCPU2Nano);
             });
             
-            function mostrarResultados(tiempo1, tiempo2) {
+            function mostrarResultados(tiempo1s, tiempo2s, tiempo1n, tiempo2n, frecuencia1, frecuencia2) {
+                    // Asegurarse de que los tiempos son números
+                    tiempo1s = parseFloat(tiempo1s);
+                    tiempo2s = parseFloat(tiempo2s);
+                    tiempo1n = parseFloat(tiempo1n);
+                    tiempo2n = parseFloat(tiempo2n);
+                    frecuencia1 = parseFloat(frecuencia1);
+                    frecuencia2 = parseFloat(frecuencia2);
+
                 const resultados = document.getElementById('resultadoComparacion');
                 resultados.innerHTML = `
                     <div class="alert alert-success" role="alert">
@@ -59,21 +116,27 @@ function cargarPrograma1() {
                             <thead>
                                 <tr>
                                     <th scope="col"></th>
-                                    <th scope="col">Tiempo de ejecución (nanosegundos)</th>
+                                    <th scope="col">Segundos</th>
+                                    <th scope="col">Nanosegundos</th>
+                                    <th scope="col">Frecuencia en MHz</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <th scope="row">CPU 1:</th>
-                                    <td>${tiempo1.toFixed(2)}</td>
+                                    <td>${tiempo1s.toFixed(2)}</td>  
+                                    <td>${tiempo1n.toFixed(2)}</td>   
+                                    <td>${frecuencia1.toFixed(2)}</td>                           
                                 </tr>
                                 <tr>
                                     <th scope="row">CPU 2:</th>
-                                    <td>${tiempo2.toFixed(2)}</td>
+                                    <td>${tiempo2s.toFixed(2)}</td>
+                                    <td>${tiempo2n.toFixed(2)}</td>
+                                    <td>${frecuencia2.toFixed(2)}</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <p>Conclusión: ${tiempo1 < tiempo2 ? "CPU 1 es más eficiente que CPU 2." : "CPU 2 es más eficiente que CPU 1."}</p>
+                        <p>Conclusión: ${tiempo1s < tiempo2s ? "CPU 1 es más eficiente que CPU 2." : "CPU 2 es más eficiente que CPU 1."}</p>
                     </div>
                 `;
             }
@@ -195,6 +258,3 @@ function cargarPrograma2() {
 // Agregar eventos de clic a los botones
 btnPrograma1.addEventListener('click', cargarPrograma1);
 btnPrograma2.addEventListener('click', cargarPrograma2);
-
-
-
